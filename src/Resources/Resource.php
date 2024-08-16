@@ -2,14 +2,15 @@
 
 namespace SrsRegistrar\Resources;
 
-use SrsRegistrar\Service;
 use SimpleXMLElement;
+use SrsRegistrar\Service;
 
 abstract class Resource
 {
     public const string DEFAULT_RESOURCE_PROTOCOL = 'XCP';
 
     abstract public function getObject(): string;
+
     abstract public function getAction(): string;
 
     protected SimpleXMLElement $xmlDocument;

@@ -8,7 +8,9 @@ trait UseClassnameForAction
     {
         return strtoupper(
             preg_replace(
-                '/(?<=\\w)(?=[A-Z])|(?<=[a-z])(?=[0-9])/', '_', get_called_class()
+                '/(?<=\\w)(?=[A-Z])|(?<=[a-z])(?=[0-9])/',
+                '_',
+                substr(strrchr(static::class, '\\'), 1)
             )
         );
     }
