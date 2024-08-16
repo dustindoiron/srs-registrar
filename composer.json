@@ -8,5 +8,10 @@
         {
             "name": "Dustin Doiron"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "SrsRegistrar\\": "src/"
+        }
+    }
 }
