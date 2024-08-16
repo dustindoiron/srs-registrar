@@ -10,6 +10,8 @@ class XMLService
 
     protected SimpleXMLElement $requestDocument;
 
+    protected SimpleXMLElement $responseDocument;
+
     public static function getBaseDocument(string $path = self::DEFAULT_PATH): SimpleXMLElement|bool
     {
         return simplexml_load_file($path);
@@ -85,5 +87,22 @@ class XMLService
         }
 
         return $body;
+    }
+
+    public function createResponseDocument(string $document): SimpleXMLElement
+    {
+        $this->setResponseDocument(new SimpleXMLElement($document));
+
+        return $this->getResponseDocument();
+    }
+
+    public function setResponseDocument(SimpleXMLElement $document): void
+    {
+        $this->responseDocument = $document;
+    }
+
+    public function getResponseDocument(): SimpleXMLElement
+    {
+        return $this->responseDocument;
     }
 }

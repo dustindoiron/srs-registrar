@@ -3,6 +3,7 @@
 namespace SrsRegistrar\Resources;
 
 use SrsRegistrar\Service;
+use SrsRegistrar\Transport\HttpService;
 use SrsRegistrar\Transport\XMLService;
 
 abstract class Resource
@@ -54,7 +55,7 @@ abstract class Resource
         return $this->service;
     }
 
-    public function createRequestFromArray(array $parameters, ?string $xpath = null, ?string $container = 'dt_assoc'): void
+    public function createRequestFromArray(array $parameters, ?string $xpath = null, ?string $container = 'dt_assoc'): HttpService
     {
         if ($container) {
             $context = $this->getXmlService()->createContainer($container);
@@ -67,5 +68,7 @@ abstract class Resource
                 $this->getXmlService()->createItem($key, $value, $xpath);
             }
         }
+
+        return new HttpService($this->getService(), $this);
     }
 }
