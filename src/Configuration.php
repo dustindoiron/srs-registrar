@@ -7,15 +7,16 @@ class Configuration
     public const string DEFAULT_ENDPOINT = 'https://rr-n1-tor.opensrs.net:55443';
 
     private string $username;
+
     private string $apiKey;
+
     private string $endpoint;
 
     public function __construct(
-        string $endpoint = self::DEFAULT_ENDPOINT,
         string $apiKey,
-        string $username
-    )
-    {
+        string $username,
+        string $endpoint = self::DEFAULT_ENDPOINT,
+    ) {
         $this->setEndpoint($endpoint);
         $this->setApiKey($apiKey);
         $this->setUsername($username);
