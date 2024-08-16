@@ -2,9 +2,4 @@
 
 namespace SrsRegistrar\Transport;
 
-use GuzzleHttp\Client;
-
-class HttpService
-{
-    
-}
+class HttpService {}

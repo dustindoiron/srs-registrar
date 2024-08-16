@@ -2,8 +2,8 @@
 
 namespace SrsRegistrar\Resources;
 
-use SimpleXMLElement;
 use SrsRegistrar\Service;
+use SrsRegistrar\Transport\XMLService;
 
 abstract class Resource
 {
@@ -13,28 +13,29 @@ abstract class Resource
 
     abstract public function getAction(): string;
 
-    protected SimpleXMLElement $xmlDocument;
+    protected XMLService $xmlService;
 
     protected Service $service;
 
-    public function __construct(Service $service)
+    public function __construct(Service $service, XMLService $xmlService = new XMLService())
     {
         $this->setService($service);
+        $this->setXmlService($xmlService);
+    }
+
+    public function setXmlService(XMLService $service): void
+    {
+        $this->xmlService = $service;
+    }
+
+    public function getXmlService(): XMLService
+    {
+        return $this->xmlService;
     }
 
     public function getProtocol(): string
     {
         return self::DEFAULT_RESOURCE_PROTOCOL;
-    }
-
-    public function setXmlDocument(SimpleXMLElement $document): void
-    {
-        $this->xmlDocument = $document;
-    }
-
-    public function getXmlDocument(): SimpleXMLElement
-    {
-        return $this->xmlDocument;
     }
 
     public function setService(Service $service): void
@@ -45,5 +46,12 @@ abstract class Resource
     public function getService(): Service
     {
         return $this->service;
+    }
+
+    public function createRequestFromArray(array $parameters, string $xpath = ''): void
+    {
+        foreach ($parameters as $key => $value) {
+            $this->getXmlService()->createItem($key, $value);
+        }
     }
 }
