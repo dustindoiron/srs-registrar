@@ -67,9 +67,9 @@ class HttpService
         return md5(md5($this->getResource()->getXmlService()->getRequestDocument()->asXml().$this->getService()->getConfiguration()->getApiKey()).$this->getService()->getConfiguration()->getApiKey());
     }
 
-    public function send()
+    public function send(): void
     {
-        return $this->getHttpClient()->request(
+        $response = $this->getHttpClient()->request(
             'POST',
             '',
             array_merge(
@@ -77,5 +77,7 @@ class HttpService
                 ['body' => $this->getResource()->getXmlService()->getRequestDocument()->asXML()]
             )
         );
+
+        $this->getResource()->getXmlService()->createResponseDocument($response->getBody());
     }
 }

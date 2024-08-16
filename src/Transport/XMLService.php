@@ -105,4 +105,9 @@ class XMLService
     {
         return $this->responseDocument;
     }
+
+    public function getResponseDocumentBody(): SimpleXMLElement
+    {
+        return $this->getResponseDocument()->body[0]->data_block[0]->dt_assoc[0];
+    }
 }
