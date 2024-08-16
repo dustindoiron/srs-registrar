@@ -21,6 +21,12 @@ abstract class Resource
     {
         $this->setService($service);
         $this->setXmlService($xmlService);
+
+        $this->getXmlService()->createNewResource(
+            $this->getProtocol(),
+            $this->getObject(),
+            $this->getAction()
+        );
     }
 
     public function setXmlService(XMLService $service): void
@@ -48,10 +54,18 @@ abstract class Resource
         return $this->service;
     }
 
-    public function createRequestFromArray(array $parameters, string $xpath = ''): void
+    public function createRequestFromArray(array $parameters, ?string $xpath = null, ?string $container = 'dt_assoc'): void
     {
+        if ($container) {
+            $context = $this->getXmlService()->createContainer($container);
+        }
+
         foreach ($parameters as $key => $value) {
-            $this->getXmlService()->createItem($key, $value);
+            if (isset($context)) {
+                $this->getXmlService()->createItem($key, $value, $xpath, $context);
+            } else {
+                $this->getXmlService()->createItem($key, $value, $xpath);
+            }
         }
     }
 }
