@@ -16,7 +16,7 @@ $lookup = new Lookup($service);
 
 $parameters = [
     'domain' => 'dustindoiron.com',
-    'no-cache' => 1,
+    'no_cache' => 1,
 ];
 
 $lookup->createRequestFromArray($parameters)->send();
