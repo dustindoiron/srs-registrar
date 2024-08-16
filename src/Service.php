@@ -2,7 +2,7 @@
 
 namespace SrsRegistrar;
 
-class Client
+class Service
 {
     protected $configuration;
 

@@ -2,6 +2,7 @@
 
 namespace SrsRegistrar\Resources;
 
+use SrsRegistrar\Service;
 use SimpleXMLElement;
 
 abstract class Resource
@@ -11,7 +12,14 @@ abstract class Resource
     abstract public function getObject(): string;
     abstract public function getAction(): string;
 
-    protected $xmlDocument;
+    protected SimpleXMLElement $xmlDocument;
+
+    protected Service $service;
+
+    public function __construct(Service $service)
+    {
+        $this->setService($service);
+    }
 
     public function getProtocol(): string
     {
@@ -26,5 +34,15 @@ abstract class Resource
     public function getXmlDocument(): SimpleXMLElement
     {
         return $this->xmlDocument;
+    }
+
+    public function setService(Service $service): void
+    {
+        $this->service = $service;
+    }
+
+    public function getService(): Service
+    {
+        return $this->service;
     }
 }

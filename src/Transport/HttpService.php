@@ -6,5 +6,5 @@ use GuzzleHttp\Client;
 
 class HttpService
 {
-
+    
 }
