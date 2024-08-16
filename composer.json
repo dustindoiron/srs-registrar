@@ -1,0 +1,12 @@
+{
+    "name": "dustindoiron/srs-registrar",
+    "description": "OpenSRS registrar client",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "authors": [
+        {
+            "name": "Dustin Doiron"
+        }
+    ]
+}
