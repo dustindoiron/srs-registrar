@@ -69,6 +69,11 @@ abstract class Resource
             }
         }
 
+        return $this->getHttpService();
+    }
+
+    public function getHttpService(): HttpService
+    {
         return new HttpService($this->getService(), $this);
     }
 }
