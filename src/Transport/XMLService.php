@@ -54,13 +54,19 @@ class XMLService
     public function createContainer(
         string $type = 'dt_assoc',
         ?string $xpath = null,
-        ?SimpleXMLElement $body = null): SimpleXMLElement
+        ?SimpleXMLElement $body = null,
+        ?string $attribute = null): SimpleXMLElement
     {
         if (! isset($body)) {
             $body = $this->getRequestDocumentBody($xpath);
         }
 
-        return $body->addChild($type);
+        $body = $body->addChild($type);
+        if ($attribute) {
+            $body->addAttribute('key', $attribute);
+        }
+
+        return $body;
     }
 
     public function createItem(string $key,
